@@ -30,6 +30,9 @@ const Gameflow = (() => {
 		}
 	};
 	const checkResult = () => {
+		const array = Gameboard.gameBoard.filter((x) => typeof x === 'number');
+		console.log(array);
+
 		switch (true) {
 			case Gameboard.gameBoard[0] === Gameboard.gameBoard[1] &&
 				Gameboard.gameBoard[1] === Gameboard.gameBoard[2]:
@@ -62,8 +65,11 @@ const Gameflow = (() => {
 			case Gameboard.gameBoard[2] === Gameboard.gameBoard[4] &&
 				Gameboard.gameBoard[4] === Gameboard.gameBoard[6]:
 				return p1.sign === Gameboard.gameBoard[2] ? p1.name : p2.name;
+			case array[0] === undefined:
+				return 'tie';
 		}
 	};
+
 	const declareResult = (result) => {
 		if (result === 'tie') {
 			alert("It's a tie!");
