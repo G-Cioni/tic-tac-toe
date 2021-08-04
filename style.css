@@ -1,4 +1,6 @@
 body {
+	background-color: rgb(29, 29, 29);
+	color: rgb(221, 193, 36);
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 0.5fr 1fr 0.5fr;
