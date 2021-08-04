@@ -26,8 +26,7 @@ const Gameflow = (() => {
 				p2.moveCount++;
 			}
 			Gameboard.render();
-			checkResult();
-			declareResult();
+			declareResult(checkResult());
 		}
 	};
 	const checkResult = () => {
@@ -65,7 +64,15 @@ const Gameflow = (() => {
 				return p1.sign === Gameboard.gameBoard[2] ? p1.name : p2.name;
 		}
 	};
-	const declareResult = () => {};
+	const declareResult = (result) => {
+		if (result === 'tie') {
+			alert("It's a tie!");
+		} else if (result === p1.name) {
+			alert(`${p1.name} is the winner!`);
+		} else if (result === p2.name) {
+			alert(`${p2.name} is the winner!`);
+		}
+	};
 	return { p1, p2, move };
 })();
 
