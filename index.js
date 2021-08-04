@@ -2,12 +2,8 @@ const playerFactory = (name, sign) => {
 	let moveCount = 0;
 	const makeMove = (id) => {
 		Gameboard.gameBoard.splice(id, 1, sign);
-		// moveCounter();
 	};
 
-	// const moveCounter = () => {
-	// 	moveCount++;
-	// };
 	return { name, sign, moveCount, makeMove };
 };
 
@@ -34,7 +30,41 @@ const Gameflow = (() => {
 			declareResult();
 		}
 	};
-	const checkResult = () => {+};
+	const checkResult = () => {
+		switch (true) {
+			case Gameboard.gameBoard[0] === Gameboard.gameBoard[1] &&
+				Gameboard.gameBoard[1] === Gameboard.gameBoard[2]:
+				return p1.sign === Gameboard.gameBoard[0] ? p1.name : p2.name;
+
+			case Gameboard.gameBoard[3] === Gameboard.gameBoard[4] &&
+				Gameboard.gameBoard[4] === Gameboard.gameBoard[5]:
+				return p1.sign === Gameboard.gameBoard[3] ? p1.name : p2.name;
+
+			case Gameboard.gameBoard[6] === Gameboard.gameBoard[7] &&
+				Gameboard.gameBoard[7] === Gameboard.gameBoard[8]:
+				return p1.sign === Gameboard.gameBoard[6] ? p1.name : p2.name;
+
+			case Gameboard.gameBoard[0] === Gameboard.gameBoard[3] &&
+				Gameboard.gameBoard[3] === Gameboard.gameBoard[6]:
+				return p1.sign === Gameboard.gameBoard[0] ? p1.name : p2.name;
+
+			case Gameboard.gameBoard[1] === Gameboard.gameBoard[4] &&
+				Gameboard.gameBoard[4] === Gameboard.gameBoard[7]:
+				return p1.sign === Gameboard.gameBoard[1] ? p1.name : p2.name;
+
+			case Gameboard.gameBoard[2] === Gameboard.gameBoard[5] &&
+				Gameboard.gameBoard[5] === Gameboard.gameBoard[8]:
+				return p1.sign === Gameboard.gameBoard[2] ? p1.name : p2.name;
+
+			case Gameboard.gameBoard[0] === Gameboard.gameBoard[4] &&
+				Gameboard.gameBoard[4] === Gameboard.gameBoard[8]:
+				return p1.sign === Gameboard.gameBoard[0] ? p1.name : p2.name;
+
+			case Gameboard.gameBoard[2] === Gameboard.gameBoard[4] &&
+				Gameboard.gameBoard[4] === Gameboard.gameBoard[6]:
+				return p1.sign === Gameboard.gameBoard[2] ? p1.name : p2.name;
+		}
+	};
 	const declareResult = () => {};
 	return { p1, p2, move };
 })();
