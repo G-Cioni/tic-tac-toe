@@ -17,7 +17,10 @@ const Gameflow = (() => {
 	const p1 = playerFactory('Player 1', 'X');
 	const p2 = playerFactory('Player 2', 'O');
 	const move = (id) => {
-		if (typeof Gameboard.gameBoard[id] !== 'string') {
+		if (
+			typeof Gameboard.gameBoard[id] !== 'string' &&
+			Gameboard.popUp.textContent == ''
+		) {
 			if (p1.moveCount <= p2.moveCount) {
 				p1.makeMove(id);
 				p1.moveCount++;
@@ -72,17 +75,28 @@ const Gameflow = (() => {
 
 	const declareResult = (result) => {
 		if (result === 'tie') {
-			alert("It's a tie!");
+			Gameboard.popUp.textContent = "It's a tie";
 		} else if (result === p1.name) {
-			alert(`${p1.name} is the winner!`);
+			Gameboard.popUp.textContent = `${p1.name} is the winner!`;
 		} else if (result === p2.name) {
-			alert(`${p2.name} is the winner!`);
+			Gameboard.popUp.textContent = `${p2.name} is the winner!`;
+		}
+		if (Gameboard.popUp.textContent != '') {
+			Gameboard.popUp.style.display = 'block';
 		}
 	};
-	return { p1, p2, move };
+
+	const restartGame = () => {
+		location.reload();
+	};
+	return { p1, p2, move, restartGame };
 })();
 
 const Gameboard = (() => {
+	const popUp = document.getElementById('pop-up');
+	const restart = document.getElementById('restart');
+	restart.addEventListener('click', () => Gameflow.restartGame());
+
 	const gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 	const tileArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 	tileArray.map((tile) => {
@@ -95,5 +109,5 @@ const Gameboard = (() => {
 			typeof i === 'string' ? (tile.textContent = i) : (tile.textContent = '');
 		});
 	};
-	return { gameBoard, tileArray, render };
+	return { gameBoard, tileArray, render, popUp, restart };
 })();
