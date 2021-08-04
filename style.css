@@ -2,7 +2,6 @@ body {
 	background-color: rgb(29, 29, 29);
 	color: rgb(221, 193, 36);
 	display: grid;
-
 	grid-template-areas:
 		'. h1 .'
 		'. restart .'
@@ -74,6 +73,18 @@ h1 {
 }
 
 @media (max-width: 540px) {
+	body {
+		background-color: rgb(29, 29, 29);
+		color: rgb(221, 193, 36);
+		display: grid;
+		grid-template-areas:
+			'. h1 .'
+			'. restart .'
+			'. game-board .'
+			'. . .';
+		font-size: 16px;
+		font-family: sans-serif;
+	}
 	#game-board {
 		grid-area: game-board;
 		display: grid;
@@ -84,10 +95,10 @@ h1 {
 		width: 20em;
 	}
 	.tile {
-		width: 0.8em;
-		height: 0.8em;
+		width: 1.2em;
+		height: 1.2em;
 		background-color: rgb(83, 83, 83);
-		font-size: 8em;
+		font-size: 6em;
 		text-align: center;
 		text-justify: center;
 		border-radius: 8%;
