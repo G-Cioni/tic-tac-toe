@@ -31,9 +31,14 @@ const Gameboard = (() => {
 	const tileArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 	tileArray.map((tile) => {
 		const i = tileArray.indexOf(tile);
-		return (tileArray[i] = tileFactory(i));
+		return (tileArray[i] = tileFactory(i).tile);
 	});
-	render = () => {};
+	render = () => {
+		return tileArray.forEach((tile) => {
+			const i = gameBoard[tileArray.indexOf(tile)];
+			typeof i === 'string' ? (tile.textContent = i) : (tile.textContent = '');
+		});
+	};
 	return { gameBoard, tileArray, render };
 })();
 
