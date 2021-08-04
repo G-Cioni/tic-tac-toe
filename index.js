@@ -1,28 +1,35 @@
 const playerFactory = (name, sign) => {
-	moveCount = 0;
-	makeMove = (e) => {
-		gameBoard.splice(e, 1, sign);
-		moveCount++;
+	let moveCount = 0;
+	const makeMove = (e) => {
+		Gameboard.gameBoard.splice(e, 1, sign);
+		moveCounter();
 	};
-	return { name, sign, moveCount, makeMove };
+
+	const moveCounter = () => {
+		console.log(this);
+		moveCount++;
+		console.log(moveCount);
+	};
+	return { name, sign, moveCount, makeMove, moveCounter };
 };
 
 const tileFactory = (id) => {
 	const tile = document.getElementById(id);
-	tile.addEventListener('click', () => move(id));
+	tile.addEventListener('click', () => Gameflow.move(id));
 	return { tile };
 };
 
 const Gameflow = (() => {
-	p1 = playerFactory('Player 1', 'X');
-	p2 = playerFactory('Player 2', 'O');
-	move = (id) => {
+	const p1 = playerFactory('Player 1', 'X');
+	const p2 = playerFactory('Player 2', 'O');
+	const move = (id) => {
 		p1.moveCount <= p2.moveCount ? p1.makeMove(id) : p2.makeMove(id);
+		Gameboard.render();
 		checkResult();
 		declareResult();
 	};
-	checkResult = () => {};
-	declareResult = () => {};
+	const checkResult = () => {};
+	const declareResult = () => {};
 	return { p1, p2, move };
 })();
 
@@ -33,13 +40,11 @@ const Gameboard = (() => {
 		const i = tileArray.indexOf(tile);
 		return (tileArray[i] = tileFactory(i).tile);
 	});
-	render = () => {
-		return tileArray.forEach((tile) => {
+	const render = () => {
+		tileArray.forEach((tile) => {
 			const i = gameBoard[tileArray.indexOf(tile)];
 			typeof i === 'string' ? (tile.textContent = i) : (tile.textContent = '');
 		});
 	};
 	return { gameBoard, tileArray, render };
 })();
-
-console.log(Gameboard);

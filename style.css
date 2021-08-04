@@ -7,6 +7,8 @@ body {
 		'. game-board .'
 		'. . .';
 	justify-items: center;
+	font-size: 16px;
+	font-family: sans-serif;
 }
 
 h1 {
@@ -19,53 +21,16 @@ h1 {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr 1fr;
-	grid-template-areas:
-		'tile-0 tile-1 tile-2'
-		'tile-3 tile-4 tile-5'
-		'tile-6 tile-7 tile-8';
 	gap: 10px;
 	height: 30em;
 	width: 30em;
 }
 
 .tile {
-	width: 10em;
-	height: 10em;
+	width: 1.2em;
+	height: 1.2em;
 	background-color: rgb(129, 129, 129);
-}
-
-#tile-0 {
-	grid-area: tile-0;
-}
-
-#tile-1 {
-	grid-area: tile-1;
-}
-
-#tile-2 {
-	grid-area: tile-2;
-}
-
-#tile-3 {
-	grid-area: tile-3;
-}
-
-#tile-4 {
-	grid-area: tile-4;
-}
-
-#tile-5 {
-	grid-area: tile-5;
-}
-
-#tile-6 {
-	grid-area: tile-6;
-}
-
-#tile-7 {
-	grid-area: tile-7;
-}
-
-#tile-8 {
-	grid-area: tile-8;
+	font-size: 8em;
+	text-align: center;
+	text-justify: center;
 }
