@@ -287,9 +287,7 @@ const compFactory = (name, sign) => {
 	const randomMove = () => {
 		let id = randomInt(9);
 		while (typeof Gameboard.gameBoard[id] === 'string') {
-			console.log(typeof Gameboard.gameBoard[id]);
 			id = randomInt(9);
-			console.log(id);
 		}
 		Gameboard.gameBoard.splice(id, 1, sign);
 	};
