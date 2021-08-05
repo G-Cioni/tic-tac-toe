@@ -15,6 +15,21 @@ const compFactory = (name, sign) => {
 	// unbeatable makeMove function
 	const makeMove = () => {
 		switch (true) {
+			case Gameboard.gameBoard[6] === 'X' &&
+				Gameboard.gameBoard[7] === 'X' &&
+				typeof Gameboard.gameBoard[8] !== 'string':
+				Gameboard.gameBoard.splice(8, 1, sign);
+				break;
+			case Gameboard.gameBoard[6] === 'X' &&
+				Gameboard.gameBoard[8] === 'X' &&
+				typeof Gameboard.gameBoard[7] !== 'string':
+				Gameboard.gameBoard.splice(7, 1, sign);
+				break;
+			case Gameboard.gameBoard[7] === 'X' &&
+				Gameboard.gameBoard[8] === 'X' &&
+				typeof Gameboard.gameBoard[6] !== 'string':
+				Gameboard.gameBoard.splice(6, 1, sign);
+				break;
 			case typeof Gameboard.gameBoard[4] !== 'string':
 				Gameboard.gameBoard.splice(4, 1, sign);
 				break;
@@ -171,21 +186,6 @@ const compFactory = (name, sign) => {
 				Gameboard.gameBoard[5] === 'X' &&
 				typeof Gameboard.gameBoard[3] !== 'string':
 				Gameboard.gameBoard.splice(3, 1, sign);
-				break;
-			case Gameboard.gameBoard[6] === 'X' &&
-				Gameboard.gameBoard[7] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
-				break;
-			case Gameboard.gameBoard[6] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[7] !== 'string':
-				Gameboard.gameBoard.splice(7, 1, sign);
-				break;
-			case Gameboard.gameBoard[7] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
 				break;
 			case Gameboard.gameBoard[0] === 'X' &&
 				Gameboard.gameBoard[3] === 'X' &&
