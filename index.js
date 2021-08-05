@@ -14,7 +14,43 @@ const compFactory = (name, sign) => {
 	let { moveCount } = playerFactory();
 	// unbeatable makeMove function
 	const makeMove = () => {
+		//must fix bug: middle and corner with x. I win if i chose not to put x between o
 		switch (true) {
+			case Gameboard.gameBoard[0] === 'O' &&
+				Gameboard.gameBoard[6] === 'O' &&
+				typeof Gameboard.gameBoard[3] !== 'string':
+				Gameboard.gameBoard.splice(3, 1, sign);
+				break;
+			case Gameboard.gameBoard[0] === 'O' &&
+				Gameboard.gameBoard[4] === 'O' &&
+				typeof Gameboard.gameBoard[8] !== 'string':
+				Gameboard.gameBoard.splice(8, 1, sign);
+				break;
+			case Gameboard.gameBoard[0] === 'O' &&
+				Gameboard.gameBoard[8] === 'O' &&
+				typeof Gameboard.gameBoard[4] !== 'string':
+				Gameboard.gameBoard.splice(4, 1, sign);
+				break;
+			case Gameboard.gameBoard[4] === 'O' &&
+				Gameboard.gameBoard[8] === 'O' &&
+				typeof Gameboard.gameBoard[0] !== 'string':
+				Gameboard.gameBoard.splice(0, 1, sign);
+				break;
+			case Gameboard.gameBoard[2] === 'X' &&
+				Gameboard.gameBoard[5] === 'X' &&
+				typeof Gameboard.gameBoard[8] !== 'string':
+				Gameboard.gameBoard.splice(8, 1, sign);
+				break;
+			case Gameboard.gameBoard[2] === 'X' &&
+				Gameboard.gameBoard[8] === 'X' &&
+				typeof Gameboard.gameBoard[5] !== 'string':
+				Gameboard.gameBoard.splice(5, 1, sign);
+				break;
+			case Gameboard.gameBoard[5] === 'X' &&
+				Gameboard.gameBoard[8] === 'X' &&
+				typeof Gameboard.gameBoard[2] !== 'string':
+				Gameboard.gameBoard.splice(2, 1, sign);
+				break;
 			case Gameboard.gameBoard[0] === 'O' &&
 				Gameboard.gameBoard[1] === 'O' &&
 				typeof Gameboard.gameBoard[2] !== 'string':
@@ -65,11 +101,7 @@ const compFactory = (name, sign) => {
 				typeof Gameboard.gameBoard[6] !== 'string':
 				Gameboard.gameBoard.splice(6, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[6] === 'O' &&
-				typeof Gameboard.gameBoard[3] !== 'string':
-				Gameboard.gameBoard.splice(3, 1, sign);
-				break;
+
 			case Gameboard.gameBoard[3] === 'O' &&
 				Gameboard.gameBoard[6] === 'O' &&
 				typeof Gameboard.gameBoard[0] !== 'string':
@@ -105,21 +137,7 @@ const compFactory = (name, sign) => {
 				typeof Gameboard.gameBoard[2] !== 'string':
 				Gameboard.gameBoard.splice(2, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[4] === 'O' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
-				break;
-			case Gameboard.gameBoard[4] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
-				break;
+
 			case Gameboard.gameBoard[2] === 'O' &&
 				Gameboard.gameBoard[4] === 'O' &&
 				typeof Gameboard.gameBoard[6] !== 'string':
@@ -208,8 +226,8 @@ const compFactory = (name, sign) => {
 				break;
 			case Gameboard.gameBoard[3] === 'X' &&
 				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
+				typeof Gameboard.gameBoard[0] !== 'string':
+				Gameboard.gameBoard.splice(0, 1, sign);
 				break;
 			case Gameboard.gameBoard[1] === 'X' &&
 				Gameboard.gameBoard[4] === 'X' &&
@@ -226,21 +244,7 @@ const compFactory = (name, sign) => {
 				typeof Gameboard.gameBoard[1] !== 'string':
 				Gameboard.gameBoard.splice(1, 1, sign);
 				break;
-			case Gameboard.gameBoard[2] === 'X' &&
-				Gameboard.gameBoard[5] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
-				break;
-			case Gameboard.gameBoard[2] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[5] !== 'string':
-				Gameboard.gameBoard.splice(5, 1, sign);
-				break;
-			case Gameboard.gameBoard[5] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
-				break;
+
 			case Gameboard.gameBoard[0] === 'X' &&
 				Gameboard.gameBoard[4] === 'X' &&
 				typeof Gameboard.gameBoard[8] !== 'string':
