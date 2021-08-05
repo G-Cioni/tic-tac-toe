@@ -15,27 +15,6 @@ const compFactory = (name, sign) => {
 	// unbeatable makeMove function
 	const makeMove = () => {
 		switch (true) {
-			case Gameboard.gameBoard[6] === 'X' &&
-				Gameboard.gameBoard[7] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
-				break;
-			case Gameboard.gameBoard[6] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[7] !== 'string':
-				Gameboard.gameBoard.splice(7, 1, sign);
-				break;
-			case Gameboard.gameBoard[7] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
-				break;
-			case typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
-				break;
-			case typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
-				break;
 			case Gameboard.gameBoard[0] === 'O' &&
 				Gameboard.gameBoard[1] === 'O' &&
 				typeof Gameboard.gameBoard[2] !== 'string':
@@ -156,7 +135,27 @@ const compFactory = (name, sign) => {
 				typeof Gameboard.gameBoard[2] !== 'string':
 				Gameboard.gameBoard.splice(2, 1, sign);
 				break;
-
+			case Gameboard.gameBoard[6] === 'X' &&
+				Gameboard.gameBoard[7] === 'X' &&
+				typeof Gameboard.gameBoard[8] !== 'string':
+				Gameboard.gameBoard.splice(8, 1, sign);
+				break;
+			case Gameboard.gameBoard[6] === 'X' &&
+				Gameboard.gameBoard[8] === 'X' &&
+				typeof Gameboard.gameBoard[7] !== 'string':
+				Gameboard.gameBoard.splice(7, 1, sign);
+				break;
+			case Gameboard.gameBoard[7] === 'X' &&
+				Gameboard.gameBoard[8] === 'X' &&
+				typeof Gameboard.gameBoard[6] !== 'string':
+				Gameboard.gameBoard.splice(6, 1, sign);
+				break;
+			case typeof Gameboard.gameBoard[4] !== 'string':
+				Gameboard.gameBoard.splice(4, 1, sign);
+				break;
+			case typeof Gameboard.gameBoard[0] !== 'string':
+				Gameboard.gameBoard.splice(0, 1, sign);
+				break;
 			case Gameboard.gameBoard[0] === 'X' &&
 				Gameboard.gameBoard[1] === 'X' &&
 				typeof Gameboard.gameBoard[2] !== 'string':
