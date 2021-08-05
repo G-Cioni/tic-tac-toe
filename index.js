@@ -135,6 +135,16 @@ const compFactory = (name, sign) => {
 				typeof Gameboard.gameBoard[2] !== 'string':
 				Gameboard.gameBoard.splice(2, 1, sign);
 				break;
+			case Gameboard.gameBoard[0] === 'X' &&
+				Gameboard.gameBoard[8] === 'X' &&
+				typeof Gameboard.gameBoard[7] !== 'string':
+				Gameboard.gameBoard.splice(7, 1, sign);
+				break;
+			case Gameboard.gameBoard[2] === 'X' &&
+				Gameboard.gameBoard[6] === 'X' &&
+				typeof Gameboard.gameBoard[1] !== 'string':
+				Gameboard.gameBoard.splice(1, 1, sign);
+				break;
 			case Gameboard.gameBoard[6] === 'X' &&
 				Gameboard.gameBoard[7] === 'X' &&
 				typeof Gameboard.gameBoard[8] !== 'string':
