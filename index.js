@@ -298,8 +298,8 @@ const Gameboard = (() => {
 	const restart = document.getElementById('restart');
 	restart.addEventListener('click', () => Gameflow.restartGame());
 	// create initial arrays for gameBoard and tiles
-	const gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-	const tileArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+	let gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+	let tileArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
 	// Create all tiles within the tileArray
 	tileArray.map((tile) => {
@@ -409,7 +409,15 @@ const Gameflow = (() => {
 
 	// resets the game
 	const restartGame = () => {
-		location.reload();
+		Gameboard.gameBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+		Gameboard.tileArray = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+		// Create all tiles within the tileArray
+		Gameboard.tileArray.map((tile) => {
+			const i = Gameboard.tileArray.indexOf(tile);
+			return (Gameboard.tileArray[i] = tileFactory(i).tile);
+		});
+		Gameboard.render();
 	};
 	return { p1, p2, move, restartGame };
 })();
