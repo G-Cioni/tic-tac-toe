@@ -16,7 +16,7 @@ body {
 h1 {
 	grid-area: h1;
 	font-size: 4rem;
-	margin: 1em 0em;
+	margin: 0.6em 0em;
 }
 
 #restart {
@@ -25,9 +25,9 @@ h1 {
 	border: 3px solid rgb(221, 193, 36);
 	color: rgb(221, 193, 36);
 	border-radius: 5px;
-	font-size: 1.5em;
-	margin-bottom: 2.5em;
-	padding: 0.4em;
+	font-size: 2.5em;
+	margin-bottom: 1.5em;
+	padding: 0.2em 0.2em 0.14em 0.15em;
 }
 
 #restart:hover {
@@ -52,6 +52,7 @@ h1 {
 	text-align: center;
 	text-justify: center;
 	border-radius: 8%;
+	box-shadow: 1px 1px 5px rgb(0, 0, 0);
 }
 
 .tile:hover {
@@ -75,18 +76,12 @@ h1 {
 }
 
 @media (max-width: 540px) {
-	h1 {
-		grid-area: h1;
-		font-size: 4rem;
-		margin: 0.6em 0em;
-	}
-
 	#game-board {
 		gap: 7px;
 		height: 20em;
 		width: 20em;
 		margin-right: 2.4em;
-		margin-top: -1.2em;
+		margin-top: -0.4em;
 	}
 	.tile {
 		font-size: 6em;
