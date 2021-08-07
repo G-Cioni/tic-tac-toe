@@ -14,310 +14,67 @@ const compFactory = (name, sign) => {
 	let { moveCount } = playerFactory();
 	// unbeatable makeMove function
 	const makeMove = () => {
-		//must fix bug: middle and corner with x. I win if i chose not to put x between o
-		switch (true) {
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[6] === 'O' &&
-				typeof Gameboard.gameBoard[3] !== 'string':
-				Gameboard.gameBoard.splice(3, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[4] === 'O' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
-				break;
-			case Gameboard.gameBoard[4] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
-				break;
+		let bestScore = -Infinity;
+		let move;
+		let board = Gameboard.gameBoard;
+		for (let i = 0; i < board.length; i++) {
+			if (typeof board[i] !== 'string') {
+				const originalValue = board[i];
+				board.splice(i, 1, Gameflow.p2.sign);
+				let score = minimax(board, 0, false);
+				console.log(score);
+				board.splice(i, 1, originalValue);
+				if (score > bestScore) {
+					console.log(bestScore);
+					bestScore = score;
+					console.log(bestScore);
+					move = i;
+				}
+			}
+		}
+		board.splice(move, 1, Gameflow.p2.sign);
+	};
 
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[1] === 'O' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[2] === 'O' &&
-				typeof Gameboard.gameBoard[1] !== 'string':
-				Gameboard.gameBoard.splice(1, 1, sign);
-				break;
-			case Gameboard.gameBoard[1] === 'O' &&
-				Gameboard.gameBoard[2] === 'O' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
-				break;
-			case Gameboard.gameBoard[3] === 'O' &&
-				Gameboard.gameBoard[4] === 'O' &&
-				typeof Gameboard.gameBoard[5] !== 'string':
-				Gameboard.gameBoard.splice(5, 1, sign);
-				break;
-			case Gameboard.gameBoard[3] === 'O' &&
-				Gameboard.gameBoard[5] === 'O' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
-				break;
-			case Gameboard.gameBoard[4] === 'O' &&
-				Gameboard.gameBoard[5] === 'O' &&
-				typeof Gameboard.gameBoard[3] !== 'string':
-				Gameboard.gameBoard.splice(3, 1, sign);
-				break;
-			case Gameboard.gameBoard[6] === 'O' &&
-				Gameboard.gameBoard[7] === 'O' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
-				break;
-			case Gameboard.gameBoard[6] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[7] !== 'string':
-				Gameboard.gameBoard.splice(7, 1, sign);
-				break;
-			case Gameboard.gameBoard[7] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[3] === 'O' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
-				break;
+	const minimax = (board, depth, isMaximizing) => {
+		let result = Gameflow.checkResult();
+		if (result != null) {
+			return scores[result];
+		}
+		if (isMaximizing) {
+			let bestScore = -Infinity;
+			for (let i = 0; i < board.length; i++) {
+				if (typeof board[i] !== 'string') {
+					const originalValue = board[i];
+					board.splice(i, 1, Gameflow.p2.sign);
+					let score = minimax(board, depth + 1, false);
+					board.splice(i, 1, originalValue);
+					bestScore = Math.max(score, bestScore);
+					console.log(bestScore);
+				}
+			}
 
-			case Gameboard.gameBoard[3] === 'O' &&
-				Gameboard.gameBoard[6] === 'O' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
-				break;
-			case Gameboard.gameBoard[1] === 'O' &&
-				Gameboard.gameBoard[4] === 'O' &&
-				typeof Gameboard.gameBoard[7] !== 'string':
-				Gameboard.gameBoard.splice(7, 1, sign);
-				break;
-			case Gameboard.gameBoard[1] === 'O' &&
-				Gameboard.gameBoard[7] === 'O' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
-				break;
-			case Gameboard.gameBoard[4] === 'O' &&
-				Gameboard.gameBoard[7] === 'O' &&
-				typeof Gameboard.gameBoard[1] !== 'string':
-				Gameboard.gameBoard.splice(1, 1, sign);
-				break;
-			case Gameboard.gameBoard[2] === 'O' &&
-				Gameboard.gameBoard[5] === 'O' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
-				break;
-			case Gameboard.gameBoard[2] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[5] !== 'string':
-				Gameboard.gameBoard.splice(5, 1, sign);
-				break;
-			case Gameboard.gameBoard[5] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
-				break;
-
-			case Gameboard.gameBoard[2] === 'O' &&
-				Gameboard.gameBoard[4] === 'O' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
-				break;
-			case Gameboard.gameBoard[2] === 'O' &&
-				Gameboard.gameBoard[6] === 'O' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
-				break;
-			case Gameboard.gameBoard[4] === 'O' &&
-				Gameboard.gameBoard[6] === 'O' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[1] === 'X' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[2] === 'X' &&
-				typeof Gameboard.gameBoard[1] !== 'string':
-				Gameboard.gameBoard.splice(1, 1, sign);
-				break;
-			case Gameboard.gameBoard[1] === 'X' &&
-				Gameboard.gameBoard[2] === 'X' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
-				break;
-			case Gameboard.gameBoard[3] === 'X' &&
-				Gameboard.gameBoard[4] === 'X' &&
-				typeof Gameboard.gameBoard[5] !== 'string':
-				Gameboard.gameBoard.splice(5, 1, sign);
-				break;
-			case Gameboard.gameBoard[3] === 'X' &&
-				Gameboard.gameBoard[5] === 'X' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
-				break;
-			case Gameboard.gameBoard[4] === 'X' &&
-				Gameboard.gameBoard[5] === 'X' &&
-				typeof Gameboard.gameBoard[3] !== 'string':
-				Gameboard.gameBoard.splice(3, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[3] === 'X' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[3] !== 'string':
-				Gameboard.gameBoard.splice(3, 1, sign);
-				break;
-			case Gameboard.gameBoard[3] === 'X' &&
-				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
-				break;
-			case Gameboard.gameBoard[1] === 'X' &&
-				Gameboard.gameBoard[4] === 'X' &&
-				typeof Gameboard.gameBoard[7] !== 'string':
-				Gameboard.gameBoard.splice(7, 1, sign);
-				break;
-			case Gameboard.gameBoard[1] === 'X' &&
-				Gameboard.gameBoard[7] === 'X' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
-				break;
-			case Gameboard.gameBoard[4] === 'X' &&
-				Gameboard.gameBoard[7] === 'X' &&
-				typeof Gameboard.gameBoard[1] !== 'string':
-				Gameboard.gameBoard.splice(1, 1, sign);
-				break;
-
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[4] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
-				break;
-			case Gameboard.gameBoard[4] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
-				break;
-			case Gameboard.gameBoard[4] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
-				break;
-			case Gameboard.gameBoard[2] === 'X' &&
-				Gameboard.gameBoard[4] === 'X' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
-				break;
-			case Gameboard.gameBoard[2] === 'X' &&
-				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
-				break;
-			case Gameboard.gameBoard[4] === 'X' &&
-				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[5] === 'X' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[7] === 'X' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
-				break;
-			case Gameboard.gameBoard[5] === 'X' &&
-				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
-				break;
-			case Gameboard.gameBoard[5] === 'X' &&
-				Gameboard.gameBoard[7] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
-				break;
-			case Gameboard.gameBoard[2] === 'X' &&
-				Gameboard.gameBoard[5] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
-				break;
-			case Gameboard.gameBoard[2] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[5] !== 'string':
-				Gameboard.gameBoard.splice(5, 1, sign);
-				break;
-			case Gameboard.gameBoard[5] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
-				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[7] !== 'string':
-				Gameboard.gameBoard.splice(7, 1, sign);
-				break;
-			case Gameboard.gameBoard[2] === 'X' &&
-				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[1] !== 'string':
-				Gameboard.gameBoard.splice(1, 1, sign);
-				break;
-			case Gameboard.gameBoard[6] === 'X' &&
-				Gameboard.gameBoard[7] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
-				break;
-			case Gameboard.gameBoard[6] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[7] !== 'string':
-				Gameboard.gameBoard.splice(7, 1, sign);
-				break;
-			case Gameboard.gameBoard[7] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
-				break;
-			case typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
-				break;
-			case typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
-				break;
-
-			default:
-				randomMove();
+			return bestScore;
+		} else {
+			let bestScore = Infinity;
+			for (let i = 0; i < board.length; i++) {
+				if (typeof board[i] !== 'string') {
+					const originalValue = board[i];
+					board.splice(i, 1, Gameflow.p1.sign);
+					let score = minimax(board, depth + 1, true);
+					board.splice(i, 1, originalValue);
+					bestScore = Math.min(score, bestScore);
+				}
+			}
+			return bestScore;
 		}
 	};
-	//random Number generator
-	const randomInt = (max) => {
-		return Math.floor(Math.random() * max);
+	const scores = {
+		O: 1,
+		X: -1,
+		tie: 0,
 	};
-	// randomMove for when it doesn't matter
-	const randomMove = () => {
-		let id = randomInt(9);
-		while (typeof Gameboard.gameBoard[id] === 'string') {
-			id = randomInt(9);
-		}
-		Gameboard.gameBoard.splice(id, 1, sign);
-	};
+
+	// Gameboard.gameBoard.splice(id, 1, sign);
 	return { name, sign, moveCount, makeMove };
 };
 
@@ -395,49 +152,58 @@ const Gameflow = (() => {
 		const array = Gameboard.gameBoard.filter((x) => typeof x === 'number');
 		//check for winner
 		switch (true) {
-			case Gameboard.gameBoard[0] === Gameboard.gameBoard[1] &&
+			case typeof Gameboard.gameBoard[0] === 'string' &&
+				Gameboard.gameBoard[0] === Gameboard.gameBoard[1] &&
 				Gameboard.gameBoard[1] === Gameboard.gameBoard[2]:
-				return p1.sign === Gameboard.gameBoard[0] ? p1.name : p2.name;
+				return p1.sign === Gameboard.gameBoard[0] ? p1.sign : p2.sign;
 
-			case Gameboard.gameBoard[3] === Gameboard.gameBoard[4] &&
+			case typeof Gameboard.gameBoard[3] === 'string' &&
+				Gameboard.gameBoard[3] === Gameboard.gameBoard[4] &&
 				Gameboard.gameBoard[4] === Gameboard.gameBoard[5]:
-				return p1.sign === Gameboard.gameBoard[3] ? p1.name : p2.name;
+				return p1.sign === Gameboard.gameBoard[3] ? p1.sign : p2.sign;
 
-			case Gameboard.gameBoard[6] === Gameboard.gameBoard[7] &&
+			case typeof Gameboard.gameBoard[6] === 'string' &&
+				Gameboard.gameBoard[6] === Gameboard.gameBoard[7] &&
 				Gameboard.gameBoard[7] === Gameboard.gameBoard[8]:
-				return p1.sign === Gameboard.gameBoard[6] ? p1.name : p2.name;
+				return p1.sign === Gameboard.gameBoard[6] ? p1.sign : p2.sign;
 
-			case Gameboard.gameBoard[0] === Gameboard.gameBoard[3] &&
+			case typeof Gameboard.gameBoard[0] === 'string' &&
+				Gameboard.gameBoard[0] === Gameboard.gameBoard[3] &&
 				Gameboard.gameBoard[3] === Gameboard.gameBoard[6]:
-				return p1.sign === Gameboard.gameBoard[0] ? p1.name : p2.name;
+				return p1.sign === Gameboard.gameBoard[0] ? p1.sign : p2.sign;
 
-			case Gameboard.gameBoard[1] === Gameboard.gameBoard[4] &&
+			case typeof Gameboard.gameBoard[1] === 'string' &&
+				Gameboard.gameBoard[1] === Gameboard.gameBoard[4] &&
 				Gameboard.gameBoard[4] === Gameboard.gameBoard[7]:
-				return p1.sign === Gameboard.gameBoard[1] ? p1.name : p2.name;
+				return p1.sign === Gameboard.gameBoard[1] ? p1.sign : p2.sign;
 
-			case Gameboard.gameBoard[2] === Gameboard.gameBoard[5] &&
+			case typeof Gameboard.gameBoard[2] === 'string' &&
+				Gameboard.gameBoard[2] === Gameboard.gameBoard[5] &&
 				Gameboard.gameBoard[5] === Gameboard.gameBoard[8]:
-				return p1.sign === Gameboard.gameBoard[2] ? p1.name : p2.name;
+				return p1.sign === Gameboard.gameBoard[2] ? p1.sign : p2.sign;
 
-			case Gameboard.gameBoard[0] === Gameboard.gameBoard[4] &&
+			case typeof Gameboard.gameBoard[0] === 'string' &&
+				Gameboard.gameBoard[0] === Gameboard.gameBoard[4] &&
 				Gameboard.gameBoard[4] === Gameboard.gameBoard[8]:
-				return p1.sign === Gameboard.gameBoard[0] ? p1.name : p2.name;
+				return p1.sign === Gameboard.gameBoard[0] ? p1.sign : p2.sign;
 
-			case Gameboard.gameBoard[2] === Gameboard.gameBoard[4] &&
+			case typeof Gameboard.gameBoard[2] === 'string' &&
+				Gameboard.gameBoard[2] === Gameboard.gameBoard[4] &&
 				Gameboard.gameBoard[4] === Gameboard.gameBoard[6]:
-				return p1.sign === Gameboard.gameBoard[2] ? p1.name : p2.name;
+				return p1.sign === Gameboard.gameBoard[2] ? p1.sign : p2.sign;
+
 			case array[0] === undefined:
-				return 'tie';
+				return null;
 		}
 	};
 
 	//takes checkResult() as an input and declares winner / tie
 	const declareResult = (result) => {
-		if (result === 'tie') {
+		if (result === null) {
 			Gameboard.popUp.textContent = "It's a tie";
-		} else if (result === p1.name) {
+		} else if (result === p1.sign) {
 			Gameboard.popUp.textContent = `${p1.name} win!`;
-		} else if (result === p2.name) {
+		} else if (result === p2.sign) {
 			Gameboard.popUp.textContent = `${p2.name} wins!`;
 		}
 		if (Gameboard.popUp.textContent != '') {
@@ -449,5 +215,5 @@ const Gameflow = (() => {
 	const restartGame = () => {
 		location.reload();
 	};
-	return { p1, p2, move, restartGame };
+	return { p1, p2, move, restartGame, checkResult };
 })();
