@@ -25,9 +25,7 @@ const compFactory = (name, sign) => {
 				console.log(score);
 				board.splice(i, 1, originalValue);
 				if (score > bestScore) {
-					console.log(bestScore);
 					bestScore = score;
-					console.log(bestScore);
 					move = i;
 				}
 			}
@@ -49,10 +47,8 @@ const compFactory = (name, sign) => {
 					let score = minimax(board, depth + 1, false);
 					board.splice(i, 1, originalValue);
 					bestScore = Math.max(score, bestScore);
-					console.log(bestScore);
 				}
 			}
-
 			return bestScore;
 		} else {
 			let bestScore = Infinity;
