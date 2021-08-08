@@ -17,20 +17,20 @@ const compFactory = (name, sign) => {
 		let bestScore = -Infinity;
 		let move;
 		let board = Gameboard.gameBoard;
+		let sign = Gameflow.p2.sign;
 		for (let i = 0; i < board.length; i++) {
-			if (typeof board[i] !== 'string') {
-				const originalValue = board[i];
-				board.splice(i, 1, Gameflow.p2.sign);
+			if (typeof board[i] === 'number') {
+				const ogValue = board[i];
+				board[i] = sign;
 				let score = minimax(board, 0, false);
-				console.log(score);
-				board.splice(i, 1, originalValue);
+				board[i] = ogValue;
 				if (score > bestScore) {
 					bestScore = score;
 					move = i;
 				}
 			}
 		}
-		board.splice(move, 1, Gameflow.p2.sign);
+		board[move] = sign;
 	};
 
 	const minimax = (board, depth, isMaximizing) => {
@@ -41,26 +41,28 @@ const compFactory = (name, sign) => {
 		if (isMaximizing) {
 			let bestScore = -Infinity;
 			for (let i = 0; i < board.length; i++) {
-				if (typeof board[i] !== 'string') {
-					const originalValue = board[i];
-					board.splice(i, 1, Gameflow.p2.sign);
+				if (typeof board[i] === 'number') {
+					const ogValue = board[i];
+					board[i] = sign;
 					let score = minimax(board, depth + 1, false);
-					board.splice(i, 1, originalValue);
+					board[i] = ogValue;
 					bestScore = Math.max(score, bestScore);
 				}
 			}
+			// console.log(`Maximizing: ${bestScore}`);
 			return bestScore;
 		} else {
 			let bestScore = Infinity;
 			for (let i = 0; i < board.length; i++) {
-				if (typeof board[i] !== 'string') {
-					const originalValue = board[i];
-					board.splice(i, 1, Gameflow.p1.sign);
+				if (typeof board[i] === 'number') {
+					const ogValue = board[i];
+					board[i] = Gameflow.p1.sign;
 					let score = minimax(board, depth + 1, true);
-					board.splice(i, 1, originalValue);
+					board[i] = ogValue;
 					bestScore = Math.min(score, bestScore);
 				}
 			}
+			console.log(`Minimizing: ${bestScore}`);
 			return bestScore;
 		}
 	};
@@ -70,7 +72,7 @@ const compFactory = (name, sign) => {
 		tie: 0,
 	};
 
-	// Gameboard.gameBoard.splice(id, 1, sign);
+	// board.splice(id, 1, sign);
 	return { name, sign, moveCount, makeMove };
 };
 
@@ -112,15 +114,13 @@ const Gameflow = (() => {
 	//Create player + CPU
 	const p1 = playerFactory('You', 'X');
 	const p2 = compFactory('CPU', 'O');
+	const board = Gameboard.gameBoard;
 
 	//Makes a move based on who's turn it is. If it's the users turn it waits for a click event to trigger
 	const move = (id) => {
 		// this array allows me to check if all tiles have already been used. It prevents an infite while loop and allows to check for a tie
-		const array = Gameboard.gameBoard.filter((x) => typeof x === 'number');
-		if (
-			typeof Gameboard.gameBoard[id] !== 'string' &&
-			Gameboard.popUp.textContent == ''
-		) {
+		const array = board.filter((x) => typeof x === 'number');
+		if (typeof board[id] !== 'string' && Gameboard.popUp.textContent == '') {
 			//check if it's player 1 or player 2's turn
 			if (p1.moveCount <= p2.moveCount) {
 				p1.makeMove(id);
@@ -145,48 +145,48 @@ const Gameflow = (() => {
 	};
 	const checkResult = () => {
 		//array needed to check if all tiles have been used so it can declare a tie
-		const array = Gameboard.gameBoard.filter((x) => typeof x === 'number');
+		const array = board.filter((x) => typeof x === 'number');
 		//check for winner
 		switch (true) {
-			case typeof Gameboard.gameBoard[0] === 'string' &&
-				Gameboard.gameBoard[0] === Gameboard.gameBoard[1] &&
-				Gameboard.gameBoard[1] === Gameboard.gameBoard[2]:
-				return p1.sign === Gameboard.gameBoard[0] ? p1.sign : p2.sign;
+			case typeof board[0] === 'string' &&
+				board[0] === board[1] &&
+				board[1] === board[2]:
+				return p1.sign === board[0] ? p1.sign : p2.sign;
 
-			case typeof Gameboard.gameBoard[3] === 'string' &&
-				Gameboard.gameBoard[3] === Gameboard.gameBoard[4] &&
-				Gameboard.gameBoard[4] === Gameboard.gameBoard[5]:
-				return p1.sign === Gameboard.gameBoard[3] ? p1.sign : p2.sign;
+			case typeof board[3] === 'string' &&
+				board[3] === board[4] &&
+				board[4] === board[5]:
+				return p1.sign === board[3] ? p1.sign : p2.sign;
 
-			case typeof Gameboard.gameBoard[6] === 'string' &&
-				Gameboard.gameBoard[6] === Gameboard.gameBoard[7] &&
-				Gameboard.gameBoard[7] === Gameboard.gameBoard[8]:
-				return p1.sign === Gameboard.gameBoard[6] ? p1.sign : p2.sign;
+			case typeof board[6] === 'string' &&
+				board[6] === board[7] &&
+				board[7] === board[8]:
+				return p1.sign === board[6] ? p1.sign : p2.sign;
 
-			case typeof Gameboard.gameBoard[0] === 'string' &&
-				Gameboard.gameBoard[0] === Gameboard.gameBoard[3] &&
-				Gameboard.gameBoard[3] === Gameboard.gameBoard[6]:
-				return p1.sign === Gameboard.gameBoard[0] ? p1.sign : p2.sign;
+			case typeof board[0] === 'string' &&
+				board[0] === board[3] &&
+				board[3] === board[6]:
+				return p1.sign === board[0] ? p1.sign : p2.sign;
 
-			case typeof Gameboard.gameBoard[1] === 'string' &&
-				Gameboard.gameBoard[1] === Gameboard.gameBoard[4] &&
-				Gameboard.gameBoard[4] === Gameboard.gameBoard[7]:
-				return p1.sign === Gameboard.gameBoard[1] ? p1.sign : p2.sign;
+			case typeof board[1] === 'string' &&
+				board[1] === board[4] &&
+				board[4] === board[7]:
+				return p1.sign === board[1] ? p1.sign : p2.sign;
 
-			case typeof Gameboard.gameBoard[2] === 'string' &&
-				Gameboard.gameBoard[2] === Gameboard.gameBoard[5] &&
-				Gameboard.gameBoard[5] === Gameboard.gameBoard[8]:
-				return p1.sign === Gameboard.gameBoard[2] ? p1.sign : p2.sign;
+			case typeof board[2] === 'string' &&
+				board[2] === board[5] &&
+				board[5] === board[8]:
+				return p1.sign === board[2] ? p1.sign : p2.sign;
 
-			case typeof Gameboard.gameBoard[0] === 'string' &&
-				Gameboard.gameBoard[0] === Gameboard.gameBoard[4] &&
-				Gameboard.gameBoard[4] === Gameboard.gameBoard[8]:
-				return p1.sign === Gameboard.gameBoard[0] ? p1.sign : p2.sign;
+			case typeof board[0] === 'string' &&
+				board[0] === board[4] &&
+				board[4] === board[8]:
+				return p1.sign === board[0] ? p1.sign : p2.sign;
 
-			case typeof Gameboard.gameBoard[2] === 'string' &&
-				Gameboard.gameBoard[2] === Gameboard.gameBoard[4] &&
-				Gameboard.gameBoard[4] === Gameboard.gameBoard[6]:
-				return p1.sign === Gameboard.gameBoard[2] ? p1.sign : p2.sign;
+			case typeof board[2] === 'string' &&
+				board[2] === board[4] &&
+				board[4] === board[6]:
+				return p1.sign === board[2] ? p1.sign : p2.sign;
 
 			case array[0] === undefined:
 				return null;
