@@ -38,7 +38,6 @@ const compFactory = (name, sign) => {
 		}
 		board[move] = sign;
 	};
-	// if (score < bestScore) score = bestScore;
 
 	const minimax = (board, depth, isMaximizing) => {
 		let result = Gameflow.checkResult();
@@ -69,7 +68,7 @@ const compFactory = (name, sign) => {
 					bestScore = Math.min(score, bestScore);
 				}
 			}
-			console.log(`Minimizing: ${bestScore}`);
+			// console.log(`Minimizing: ${bestScore}`);
 			return bestScore;
 		}
 	};
