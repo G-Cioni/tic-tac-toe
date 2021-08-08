@@ -1,3 +1,9 @@
+//links tiles from html to javascript
+const tileFactory = (id) => {
+	const tile = document.getElementById(id);
+	tile.addEventListener('click', () => Gameflow.move(id));
+	return { tile };
+};
 // Create player factory function
 const playerFactory = (name, sign) => {
 	let moveCount = 0;
@@ -17,21 +23,19 @@ const compFactory = (name, sign) => {
 		let bestScore = -Infinity;
 		let move;
 		let board = Gameboard.gameBoard;
-		for (let i = 0; i < board.length; i++) {
-			if (typeof board[i] !== 'string') {
-				const originalValue = board[i];
-				board.splice(i, 1, Gameflow.p2.sign);
-				let score = minimax(board, 0, false);
-				console.log(score);
-				board.splice(i, 1, originalValue);
-				if (score > bestScore) {
-					bestScore = score;
-					move = i;
-				}
-			}
-		}
-		board.splice(move, 1, Gameflow.p2.sign);
+		let sign = Gameflow.p2.sign;
+		board.reduce((x, y) => {
+			x = board[y];
+			if (typeof board[y] !== 'string') board[y] = sign;
+			score = minimax(board, 0, false);
+			board[y] = x;
+			if (score > bestScore) bestScore = score;
+			move = board[y];
+			console.log(move);
+		}, 0);
+		board.splice(move, 1, sign);
 	};
+	// if (score < bestScore) score = bestScore;
 
 	const minimax = (board, depth, isMaximizing) => {
 		let result = Gameflow.checkResult();
@@ -40,30 +44,29 @@ const compFactory = (name, sign) => {
 		}
 		if (isMaximizing) {
 			let bestScore = -Infinity;
-			for (let i = 0; i < board.length; i++) {
-				if (typeof board[i] !== 'string') {
-					const originalValue = board[i];
-					board.splice(i, 1, Gameflow.p2.sign);
-					let score = minimax(board, depth + 1, false);
-					board.splice(i, 1, originalValue);
-					bestScore = Math.max(score, bestScore);
-				}
-			}
-			return bestScore;
+			board.reduce((x, y) => {
+				x = board[y];
+				if (typeof board[y] !== 'string') board[y] = sign;
+				score = minimax(board, depth + 1, false);
+				board[y] = x;
+				if (score > bestScore) score = bestScore;
+				console.log(move);
+			}, 0);
 		} else {
 			let bestScore = Infinity;
-			for (let i = 0; i < board.length; i++) {
-				if (typeof board[i] !== 'string') {
-					const originalValue = board[i];
-					board.splice(i, 1, Gameflow.p1.sign);
-					let score = minimax(board, depth + 1, true);
-					board.splice(i, 1, originalValue);
-					bestScore = Math.min(score, bestScore);
-				}
-			}
-			return bestScore;
+			board.reduce((x, y) => {
+				x = board[y];
+				if (typeof board[y] !== 'string') board[y] = sign;
+				score = minimax(board, depth + 1, true);
+				board[y] = x;
+				if (score < bestScore) score = bestScore;
+				console.log(move);
+			}, 0);
 		}
+
+		return bestScore;
 	};
+
 	const scores = {
 		O: 1,
 		X: -1,
@@ -72,13 +75,6 @@ const compFactory = (name, sign) => {
 
 	// Gameboard.gameBoard.splice(id, 1, sign);
 	return { name, sign, moveCount, makeMove };
-};
-
-//links tiles from html to javascript
-const tileFactory = (id) => {
-	const tile = document.getElementById(id);
-	tile.addEventListener('click', () => Gameflow.move(id));
-	return { tile };
 };
 
 //Gameboard module
