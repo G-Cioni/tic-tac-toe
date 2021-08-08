@@ -1,3 +1,9 @@
+//links tiles from html to javascript
+const tileFactory = (id) => {
+	const tile = document.getElementById(id);
+	tile.addEventListener('click', () => Gameflow.move(id));
+	return { tile };
+};
 // Create player factory function
 const playerFactory = (name, sign) => {
 	let moveCount = 0;
@@ -32,6 +38,7 @@ const compFactory = (name, sign) => {
 		}
 		board[move] = sign;
 	};
+	// if (score < bestScore) score = bestScore;
 
 	const minimax = (board, depth, isMaximizing) => {
 		let result = Gameflow.checkResult();
@@ -66,6 +73,7 @@ const compFactory = (name, sign) => {
 			return bestScore;
 		}
 	};
+
 	const scores = {
 		O: 1,
 		X: -1,
@@ -74,13 +82,6 @@ const compFactory = (name, sign) => {
 
 	// board.splice(id, 1, sign);
 	return { name, sign, moveCount, makeMove };
-};
-
-//links tiles from html to javascript
-const tileFactory = (id) => {
-	const tile = document.getElementById(id);
-	tile.addEventListener('click', () => Gameflow.move(id));
-	return { tile };
 };
 
 //Gameboard module
