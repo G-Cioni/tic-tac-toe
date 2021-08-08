@@ -11,295 +11,187 @@ const playerFactory = (name, sign) => {
 // Create computer factory function
 
 const compFactory = (name, sign) => {
+	let board = Gameboard.gameBoard;
 	let { moveCount } = playerFactory();
 	// unbeatable makeMove function
 	const makeMove = () => {
 		//must fix bug: middle and corner with x. I win if i chose not to put x between o
 		switch (true) {
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[6] === 'O' &&
-				typeof Gameboard.gameBoard[3] !== 'string':
-				Gameboard.gameBoard.splice(3, 1, sign);
+			case board[0] === 'O' && board[6] === 'O' && typeof board[3] !== 'string':
+				board.splice(3, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[4] === 'O' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
+			case board[0] === 'O' && board[4] === 'O' && typeof board[8] !== 'string':
+				board.splice(8, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
+			case board[0] === 'O' && board[8] === 'O' && typeof board[4] !== 'string':
+				board.splice(4, 1, sign);
 				break;
-			case Gameboard.gameBoard[4] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
+			case board[4] === 'O' && board[8] === 'O' && typeof board[0] !== 'string':
+				board.splice(0, 1, sign);
 				break;
 
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[1] === 'O' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
+			case board[0] === 'O' && board[1] === 'O' && typeof board[2] !== 'string':
+				board.splice(2, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[2] === 'O' &&
-				typeof Gameboard.gameBoard[1] !== 'string':
-				Gameboard.gameBoard.splice(1, 1, sign);
+			case board[0] === 'O' && board[2] === 'O' && typeof board[1] !== 'string':
+				board.splice(1, 1, sign);
 				break;
-			case Gameboard.gameBoard[1] === 'O' &&
-				Gameboard.gameBoard[2] === 'O' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
+			case board[1] === 'O' && board[2] === 'O' && typeof board[0] !== 'string':
+				board.splice(0, 1, sign);
 				break;
-			case Gameboard.gameBoard[3] === 'O' &&
-				Gameboard.gameBoard[4] === 'O' &&
-				typeof Gameboard.gameBoard[5] !== 'string':
-				Gameboard.gameBoard.splice(5, 1, sign);
+			case board[3] === 'O' && board[4] === 'O' && typeof board[5] !== 'string':
+				board.splice(5, 1, sign);
 				break;
-			case Gameboard.gameBoard[3] === 'O' &&
-				Gameboard.gameBoard[5] === 'O' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
+			case board[3] === 'O' && board[5] === 'O' && typeof board[4] !== 'string':
+				board.splice(4, 1, sign);
 				break;
-			case Gameboard.gameBoard[4] === 'O' &&
-				Gameboard.gameBoard[5] === 'O' &&
-				typeof Gameboard.gameBoard[3] !== 'string':
-				Gameboard.gameBoard.splice(3, 1, sign);
+			case board[4] === 'O' && board[5] === 'O' && typeof board[3] !== 'string':
+				board.splice(3, 1, sign);
 				break;
-			case Gameboard.gameBoard[6] === 'O' &&
-				Gameboard.gameBoard[7] === 'O' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
+			case board[6] === 'O' && board[7] === 'O' && typeof board[8] !== 'string':
+				board.splice(8, 1, sign);
 				break;
-			case Gameboard.gameBoard[6] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[7] !== 'string':
-				Gameboard.gameBoard.splice(7, 1, sign);
+			case board[6] === 'O' && board[8] === 'O' && typeof board[7] !== 'string':
+				board.splice(7, 1, sign);
 				break;
-			case Gameboard.gameBoard[7] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
+			case board[7] === 'O' && board[8] === 'O' && typeof board[6] !== 'string':
+				board.splice(6, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'O' &&
-				Gameboard.gameBoard[3] === 'O' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
+			case board[0] === 'O' && board[3] === 'O' && typeof board[6] !== 'string':
+				board.splice(6, 1, sign);
 				break;
 
-			case Gameboard.gameBoard[3] === 'O' &&
-				Gameboard.gameBoard[6] === 'O' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
+			case board[3] === 'O' && board[6] === 'O' && typeof board[0] !== 'string':
+				board.splice(0, 1, sign);
 				break;
-			case Gameboard.gameBoard[1] === 'O' &&
-				Gameboard.gameBoard[4] === 'O' &&
-				typeof Gameboard.gameBoard[7] !== 'string':
-				Gameboard.gameBoard.splice(7, 1, sign);
+			case board[1] === 'O' && board[4] === 'O' && typeof board[7] !== 'string':
+				board.splice(7, 1, sign);
 				break;
-			case Gameboard.gameBoard[1] === 'O' &&
-				Gameboard.gameBoard[7] === 'O' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
+			case board[1] === 'O' && board[7] === 'O' && typeof board[4] !== 'string':
+				board.splice(4, 1, sign);
 				break;
-			case Gameboard.gameBoard[4] === 'O' &&
-				Gameboard.gameBoard[7] === 'O' &&
-				typeof Gameboard.gameBoard[1] !== 'string':
-				Gameboard.gameBoard.splice(1, 1, sign);
+			case board[4] === 'O' && board[7] === 'O' && typeof board[1] !== 'string':
+				board.splice(1, 1, sign);
 				break;
-			case Gameboard.gameBoard[2] === 'O' &&
-				Gameboard.gameBoard[5] === 'O' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
+			case board[2] === 'O' && board[5] === 'O' && typeof board[8] !== 'string':
+				board.splice(8, 1, sign);
 				break;
-			case Gameboard.gameBoard[2] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[5] !== 'string':
-				Gameboard.gameBoard.splice(5, 1, sign);
+			case board[2] === 'O' && board[8] === 'O' && typeof board[5] !== 'string':
+				board.splice(5, 1, sign);
 				break;
-			case Gameboard.gameBoard[5] === 'O' &&
-				Gameboard.gameBoard[8] === 'O' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
+			case board[5] === 'O' && board[8] === 'O' && typeof board[2] !== 'string':
+				board.splice(2, 1, sign);
 				break;
 
-			case Gameboard.gameBoard[2] === 'O' &&
-				Gameboard.gameBoard[4] === 'O' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
+			case board[2] === 'O' && board[4] === 'O' && typeof board[6] !== 'string':
+				board.splice(6, 1, sign);
 				break;
-			case Gameboard.gameBoard[2] === 'O' &&
-				Gameboard.gameBoard[6] === 'O' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
+			case board[2] === 'O' && board[6] === 'O' && typeof board[4] !== 'string':
+				board.splice(4, 1, sign);
 				break;
-			case Gameboard.gameBoard[4] === 'O' &&
-				Gameboard.gameBoard[6] === 'O' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
+			case board[4] === 'O' && board[6] === 'O' && typeof board[2] !== 'string':
+				board.splice(2, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[1] === 'X' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
+			case board[6] === 'X' && board[8] === 'X' && typeof board[7] !== 'string':
+				board.splice(7, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[2] === 'X' &&
-				typeof Gameboard.gameBoard[1] !== 'string':
-				Gameboard.gameBoard.splice(1, 1, sign);
+			case board[0] === 'X' && board[1] === 'X' && typeof board[2] !== 'string':
+				board.splice(2, 1, sign);
 				break;
-			case Gameboard.gameBoard[1] === 'X' &&
-				Gameboard.gameBoard[2] === 'X' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
+			case board[0] === 'X' && board[2] === 'X' && typeof board[1] !== 'string':
+				board.splice(1, 1, sign);
 				break;
-			case Gameboard.gameBoard[3] === 'X' &&
-				Gameboard.gameBoard[4] === 'X' &&
-				typeof Gameboard.gameBoard[5] !== 'string':
-				Gameboard.gameBoard.splice(5, 1, sign);
+			case board[1] === 'X' && board[2] === 'X' && typeof board[0] !== 'string':
+				board.splice(0, 1, sign);
 				break;
-			case Gameboard.gameBoard[3] === 'X' &&
-				Gameboard.gameBoard[5] === 'X' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
+			case board[3] === 'X' && board[4] === 'X' && typeof board[5] !== 'string':
+				board.splice(5, 1, sign);
 				break;
-			case Gameboard.gameBoard[4] === 'X' &&
-				Gameboard.gameBoard[5] === 'X' &&
-				typeof Gameboard.gameBoard[3] !== 'string':
-				Gameboard.gameBoard.splice(3, 1, sign);
+			case board[3] === 'X' && board[5] === 'X' && typeof board[4] !== 'string':
+				board.splice(4, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[3] === 'X' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
+			case board[4] === 'X' && board[5] === 'X' && typeof board[3] !== 'string':
+				board.splice(3, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[3] !== 'string':
-				Gameboard.gameBoard.splice(3, 1, sign);
+			case board[0] === 'X' && board[3] === 'X' && typeof board[6] !== 'string':
+				board.splice(6, 1, sign);
 				break;
-			case Gameboard.gameBoard[3] === 'X' &&
-				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
+			case board[0] === 'X' && board[6] === 'X' && typeof board[3] !== 'string':
+				board.splice(3, 1, sign);
 				break;
-			case Gameboard.gameBoard[1] === 'X' &&
-				Gameboard.gameBoard[4] === 'X' &&
-				typeof Gameboard.gameBoard[7] !== 'string':
-				Gameboard.gameBoard.splice(7, 1, sign);
+			case board[3] === 'X' && board[6] === 'X' && typeof board[0] !== 'string':
+				board.splice(0, 1, sign);
 				break;
-			case Gameboard.gameBoard[1] === 'X' &&
-				Gameboard.gameBoard[7] === 'X' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
+			case board[1] === 'X' && board[4] === 'X' && typeof board[7] !== 'string':
+				board.splice(7, 1, sign);
 				break;
-			case Gameboard.gameBoard[4] === 'X' &&
-				Gameboard.gameBoard[7] === 'X' &&
-				typeof Gameboard.gameBoard[1] !== 'string':
-				Gameboard.gameBoard.splice(1, 1, sign);
+			case board[1] === 'X' && board[7] === 'X' && typeof board[4] !== 'string':
+				board.splice(4, 1, sign);
+				break;
+			case board[4] === 'X' && board[7] === 'X' && typeof board[1] !== 'string':
+				board.splice(1, 1, sign);
 				break;
 
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[4] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
+			case board[0] === 'X' && board[4] === 'X' && typeof board[8] !== 'string':
+				board.splice(8, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
+			case board[0] === 'X' && board[8] === 'X' && typeof board[4] !== 'string':
+				board.splice(4, 1, sign);
 				break;
-			case Gameboard.gameBoard[4] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
+			case board[4] === 'X' && board[8] === 'X' && typeof board[0] !== 'string':
+				board.splice(0, 1, sign);
 				break;
-			case Gameboard.gameBoard[4] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
+			case board[4] === 'X' && board[8] === 'X' && typeof board[2] !== 'string':
+				board.splice(2, 1, sign);
 				break;
-			case Gameboard.gameBoard[2] === 'X' &&
-				Gameboard.gameBoard[4] === 'X' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
+			case board[2] === 'X' && board[4] === 'X' && typeof board[6] !== 'string':
+				board.splice(6, 1, sign);
 				break;
-			case Gameboard.gameBoard[2] === 'X' &&
-				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
+			case board[2] === 'X' && board[6] === 'X' && typeof board[4] !== 'string':
+				board.splice(4, 1, sign);
 				break;
-			case Gameboard.gameBoard[4] === 'X' &&
-				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
+			case board[4] === 'X' && board[6] === 'X' && typeof board[2] !== 'string':
+				board.splice(2, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[5] === 'X' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
+			case board[0] === 'X' && board[5] === 'X' && typeof board[2] !== 'string':
+				board.splice(2, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[7] === 'X' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
+			case board[0] === 'X' && board[7] === 'X' && typeof board[6] !== 'string':
+				board.splice(6, 1, sign);
 				break;
-			case Gameboard.gameBoard[5] === 'X' &&
-				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
+			case board[5] === 'X' && board[6] === 'X' && typeof board[8] !== 'string':
+				board.splice(8, 1, sign);
 				break;
-			case Gameboard.gameBoard[5] === 'X' &&
-				Gameboard.gameBoard[7] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
+			case board[5] === 'X' && board[7] === 'X' && typeof board[8] !== 'string':
+				board.splice(8, 1, sign);
 				break;
-			case Gameboard.gameBoard[2] === 'X' &&
-				Gameboard.gameBoard[5] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
+			case board[2] === 'X' && board[5] === 'X' && typeof board[8] !== 'string':
+				board.splice(8, 1, sign);
 				break;
-			case Gameboard.gameBoard[2] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[5] !== 'string':
-				Gameboard.gameBoard.splice(5, 1, sign);
+			case board[2] === 'X' && board[8] === 'X' && typeof board[5] !== 'string':
+				board.splice(5, 1, sign);
 				break;
-			case Gameboard.gameBoard[5] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[2] !== 'string':
-				Gameboard.gameBoard.splice(2, 1, sign);
+			case board[5] === 'X' && board[8] === 'X' && typeof board[2] !== 'string':
+				board.splice(2, 1, sign);
 				break;
-			case Gameboard.gameBoard[0] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[7] !== 'string':
-				Gameboard.gameBoard.splice(7, 1, sign);
+			case board[0] === 'X' && board[8] === 'X' && typeof board[7] !== 'string':
+				board.splice(7, 1, sign);
 				break;
-			case Gameboard.gameBoard[2] === 'X' &&
-				Gameboard.gameBoard[6] === 'X' &&
-				typeof Gameboard.gameBoard[1] !== 'string':
-				Gameboard.gameBoard.splice(1, 1, sign);
+			case board[2] === 'X' && board[6] === 'X' && typeof board[1] !== 'string':
+				board.splice(1, 1, sign);
 				break;
-			case Gameboard.gameBoard[6] === 'X' &&
-				Gameboard.gameBoard[7] === 'X' &&
-				typeof Gameboard.gameBoard[8] !== 'string':
-				Gameboard.gameBoard.splice(8, 1, sign);
+			case board[6] === 'X' && board[7] === 'X' && typeof board[8] !== 'string':
+				board.splice(8, 1, sign);
 				break;
-			case Gameboard.gameBoard[6] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[7] !== 'string':
-				Gameboard.gameBoard.splice(7, 1, sign);
+
+			case board[7] === 'X' && board[8] === 'X' && typeof board[6] !== 'string':
+				board.splice(6, 1, sign);
 				break;
-			case Gameboard.gameBoard[7] === 'X' &&
-				Gameboard.gameBoard[8] === 'X' &&
-				typeof Gameboard.gameBoard[6] !== 'string':
-				Gameboard.gameBoard.splice(6, 1, sign);
+			case typeof board[4] !== 'string':
+				board.splice(4, 1, sign);
 				break;
-			case typeof Gameboard.gameBoard[4] !== 'string':
-				Gameboard.gameBoard.splice(4, 1, sign);
-				break;
-			case typeof Gameboard.gameBoard[0] !== 'string':
-				Gameboard.gameBoard.splice(0, 1, sign);
+			case typeof board[0] !== 'string':
+				board.splice(0, 1, sign);
 				break;
 
 			default:
@@ -313,10 +205,10 @@ const compFactory = (name, sign) => {
 	// randomMove for when it doesn't matter
 	const randomMove = () => {
 		let id = randomInt(9);
-		while (typeof Gameboard.gameBoard[id] === 'string') {
+		while (typeof board[id] === 'string') {
 			id = randomInt(9);
 		}
-		Gameboard.gameBoard.splice(id, 1, sign);
+		board.splice(id, 1, sign);
 	};
 	return { name, sign, moveCount, makeMove };
 };
@@ -359,15 +251,11 @@ const Gameflow = (() => {
 	//Create player + CPU
 	const p1 = playerFactory('You', 'X');
 	const p2 = compFactory('CPU', 'O');
-
-	//Makes a move based on who's turn it is. If it's the users turn it waits for a click event to trigger
+	let board = Gameboard.gameBoard;
 	const move = (id) => {
 		// this array allows me to check if all tiles have already been used. It prevents an infite while loop and allows to check for a tie
-		const array = Gameboard.gameBoard.filter((x) => typeof x === 'number');
-		if (
-			typeof Gameboard.gameBoard[id] !== 'string' &&
-			Gameboard.popUp.textContent == ''
-		) {
+		const array = board.filter((x) => typeof x === 'number');
+		if (typeof board[id] !== 'string' && Gameboard.popUp.textContent == '') {
 			//check if it's player 1 or player 2's turn
 			if (p1.moveCount <= p2.moveCount) {
 				p1.makeMove(id);
@@ -392,40 +280,32 @@ const Gameflow = (() => {
 	};
 	const checkResult = () => {
 		//array needed to check if all tiles have been used so it can declare a tie
-		const array = Gameboard.gameBoard.filter((x) => typeof x === 'number');
+		const array = board.filter((x) => typeof x === 'number');
 		//check for winner
 		switch (true) {
-			case Gameboard.gameBoard[0] === Gameboard.gameBoard[1] &&
-				Gameboard.gameBoard[1] === Gameboard.gameBoard[2]:
-				return p1.sign === Gameboard.gameBoard[0] ? p1.name : p2.name;
+			case board[0] === board[1] && board[1] === board[2]:
+				return p1.sign === board[0] ? p1.name : p2.name;
 
-			case Gameboard.gameBoard[3] === Gameboard.gameBoard[4] &&
-				Gameboard.gameBoard[4] === Gameboard.gameBoard[5]:
-				return p1.sign === Gameboard.gameBoard[3] ? p1.name : p2.name;
+			case board[3] === board[4] && board[4] === board[5]:
+				return p1.sign === board[3] ? p1.name : p2.name;
 
-			case Gameboard.gameBoard[6] === Gameboard.gameBoard[7] &&
-				Gameboard.gameBoard[7] === Gameboard.gameBoard[8]:
-				return p1.sign === Gameboard.gameBoard[6] ? p1.name : p2.name;
+			case board[6] === board[7] && board[7] === board[8]:
+				return p1.sign === board[6] ? p1.name : p2.name;
 
-			case Gameboard.gameBoard[0] === Gameboard.gameBoard[3] &&
-				Gameboard.gameBoard[3] === Gameboard.gameBoard[6]:
-				return p1.sign === Gameboard.gameBoard[0] ? p1.name : p2.name;
+			case board[0] === board[3] && board[3] === board[6]:
+				return p1.sign === board[0] ? p1.name : p2.name;
 
-			case Gameboard.gameBoard[1] === Gameboard.gameBoard[4] &&
-				Gameboard.gameBoard[4] === Gameboard.gameBoard[7]:
-				return p1.sign === Gameboard.gameBoard[1] ? p1.name : p2.name;
+			case board[1] === board[4] && board[4] === board[7]:
+				return p1.sign === board[1] ? p1.name : p2.name;
 
-			case Gameboard.gameBoard[2] === Gameboard.gameBoard[5] &&
-				Gameboard.gameBoard[5] === Gameboard.gameBoard[8]:
-				return p1.sign === Gameboard.gameBoard[2] ? p1.name : p2.name;
+			case board[2] === board[5] && board[5] === board[8]:
+				return p1.sign === board[2] ? p1.name : p2.name;
 
-			case Gameboard.gameBoard[0] === Gameboard.gameBoard[4] &&
-				Gameboard.gameBoard[4] === Gameboard.gameBoard[8]:
-				return p1.sign === Gameboard.gameBoard[0] ? p1.name : p2.name;
+			case board[0] === board[4] && board[4] === board[8]:
+				return p1.sign === board[0] ? p1.name : p2.name;
 
-			case Gameboard.gameBoard[2] === Gameboard.gameBoard[4] &&
-				Gameboard.gameBoard[4] === Gameboard.gameBoard[6]:
-				return p1.sign === Gameboard.gameBoard[2] ? p1.name : p2.name;
+			case board[2] === board[4] && board[4] === board[6]:
+				return p1.sign === board[2] ? p1.name : p2.name;
 			case array[0] === undefined:
 				return 'tie';
 		}
